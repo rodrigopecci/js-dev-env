@@ -1,0 +1,22 @@
+{
+	"name": "javascript-development-environment",
+	"version": "1.0.0",
+	"description": "Javascript development environment",
+	"main": "index.js",
+	"scripts": {
+		"prestart": "babel-node scripts/start-message.js",
+		"start": "babel-node scripts/server.js",
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Rodrigo Pecci Acorse",
+	"license": "MIT",
+	"devDependencies": {
+		"@babel/cli": "^7.8.4",
+		"@babel/core": "^7.9.6",
+		"@babel/node": "^7.8.7",
+		"@babel/preset-env": "^7.9.6",
+		"chalk": "^4.0.0",
+		"express": "^4.17.1",
+		"open": "^7.0.3"
+	}
+}
