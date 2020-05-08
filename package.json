@@ -5,12 +5,19 @@
 	"main": "index.js",
 	"scripts": {
 		"prestart": "babel-node scripts/start.message.js",
-		"start": "npm-run-all --parallel open:src lint:watch test:watch",
+		"start": "npm-run-all --parallel open:src lint:watch test:watch start-mock-api",
 		"open:src": "babel-node scripts/server.js",
 		"lint": "esw webpack.config.* src scripts --color",
 		"lint:watch": "npm run lint -- --watch",
 		"test": "mocha --reporter progress scripts/test.config.js \"src/**/*.test.js\"",
-		"test:watch": "npm run test -- --watch"
+		"test:watch": "npm run test -- --watch",
+		"generate:mock-data": "babel-node scripts/mock.generate.js",
+		"prestart-mock-api": "npm run generate:mock-data",
+		"start-mock-api": "json-server --watch src/api/db.json --port 3001",
+		"clean-dist": "rimraf ./dist && mkdir dist",
+		"prebuild": "npm-run-all clean-dist test lint",
+		"build": "babel-node scripts/build.js",
+		"postbuild": "babel-node scripts/dist.server.js"
 	},
 	"author": "Rodrigo Pecci Acorse",
 	"license": "MIT",
@@ -28,7 +35,11 @@
 		"eslint-plugin-import": "^2.20.2",
 		"eslint-watch": "^6.0.1",
 		"express": "^4.17.1",
+		"extract-text-webpack-plugin": "^3.0.2",
+		"html-webpack-plugin": "^4.3.0",
 		"jsdom": "^16.2.2",
+		"json-schema-faker": "^0.3.6",
+		"json-server": "^0.16.1",
 		"mocha": "^7.1.2",
 		"npm-run-all": "^4.1.5",
 		"numeral": "^2.0.6",
@@ -37,6 +48,7 @@
 		"webpack": "^4.43.0",
 		"webpack-cli": "^3.3.11",
 		"webpack-dev-middleware": "^3.7.2",
-		"webpack-hot-middleware": "^2.25.0"
+		"webpack-hot-middleware": "^2.25.0",
+		"webpack-md5-hash": "0.0.6"
 	}
 }
